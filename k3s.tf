@@ -11,7 +11,7 @@ module "k3s" {
   managed_fields           = ["label"]
   generate_ca_certificates = true
 
-  global_flags = [for instance in digitalocean_droplet.node_instances : "--tls-san ${instance.ipv4_address}"]
+  global_flags = [for instance in digitalocean_droplet.node_instances : "--tls-san ${instance.ipv4_address} --disable=servicelb --disable=traefik"]
 
   servers = {
     # The node name will be automatically provided by
